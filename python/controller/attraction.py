@@ -24,8 +24,28 @@ def add_attraction(data):
 
     return id
 
+def add_critique(data):
+    print(data, flush=True)
+    
+    if (not "text" in data or data["text"] == ""):
+        return False
+
+    if (not "note" in data or data["note"] is None):
+        return False
+
+    else:
+      requete = "INSERT INTO critiques (nom, prenom, text, note) VALUES (?, ?, ?, ?);"
+      id = req.insert_in_db(requete, (data["nom"], data["prenom"], data["text"], data["note"]))
+
+    return id
+
 def get_all_attraction():
     json = req.select_from_db("SELECT * FROM attraction")
+    
+    return json
+
+def get_all_critique():
+    json = req.select_from_db("SELECT * FROM critiques")
     
     return json
 

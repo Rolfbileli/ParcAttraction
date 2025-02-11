@@ -17,3 +17,14 @@ CREATE TABLE users (
     name varchar(255) not null,
     password varchar(255) not null
 );
+
+DROP TABLE IF EXISTS critiques;
+
+CREATE TABLE critiques (
+    critique_id int auto_increment,
+    primary key(critique_id),
+    name varchar(255) ,
+    prenom varchar(255) ,
+    text varchar(255),
+    note int 
+); 
