@@ -67,3 +67,19 @@ def login():
 
     result = jsonify({"token": user.encode_auth_token(list(records[0])[0]), "name": json['name']})
     return result, 200
+
+ #Critiques
+
+@app.get('/critique')
+def getCritique():
+    result = attraction.get_all_critique()
+    return result, 200
+
+@app.post('/critique')
+def postCritique():
+    
+    json = request.get_json()
+    retour = attraction.add_critique(json)
+    if (retour):
+        return jsonify({"message": "Element ajouté.", "result": retour}), 200
+    return jsonify({"message": "Erreur lors de l'ajout.", "result": retour}), 500

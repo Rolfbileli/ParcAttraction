@@ -1,6 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {  ElementRef, ViewChild } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { AttractionInterface } from '../Interface/attraction.interface';
 import { AttractionService } from '../Service/attraction.service';
@@ -10,14 +9,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
 import { CritiqueInterface } from '../Interface/critique.interface';
-import { MatDialog } from '@angular/material/dialog';
+
+
 @Component({
   standalone: true ,
   selector: 'app-pop-up',
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatButtonModule, MatCardModule  ],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatButtonModule, MatCardModule],
   templateUrl: './popup.component.html',
   styleUrl: './accueil.component.scss'
 
@@ -25,11 +24,28 @@ import { MatDialog } from '@angular/material/dialog';
 export class PopUpComponent implements OnInit {
 
   firstName;
-  constructor( @Inject(MAT_DIALOG_DATA) public data ) {
+  constructor( @Inject(MAT_DIALOG_DATA) public data , public attractionService: AttractionService ) {
 
     this.firstName = data.name
   }
 
   ngOnInit(): void {
   }
+
+  public fc = inject(FormBuilder);
+
+  critiqueFormGroup = this.fc.group({
+    name:[""],
+    prenom:[""],
+    text:[0, Validators.required],
+    note:["", Validators.required]
+  });;
+
+  public onSubmit(critiqueFormulaire: FormGroup) {
+      console.log(critiqueFormulaire)
+      this.attractionService.postCritiqueAttraction(critiqueFormulaire.getRawValue()).subscribe(result => {
+        critiqueFormulaire.patchValue({critique_id: result.result});
+        
+      });
+    }
 }

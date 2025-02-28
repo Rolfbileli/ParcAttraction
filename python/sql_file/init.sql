@@ -9,8 +9,7 @@ CREATE TABLE attraction (
     visible bool default true
 );
 
-DROP TABLE IF EXISTS users;
-
+-- Recréer la table users
 CREATE TABLE users (
     users_id int auto_increment,
     primary key(users_id),
@@ -18,9 +17,9 @@ CREATE TABLE users (
     password varchar(255) not null
 );
 
-DROP TABLE IF EXISTS critiques;
+DROP TABLE IF EXISTS critique;
 
-CREATE TABLE critiques (
+CREATE TABLE critique (
     critique_id int auto_increment,
     primary key(critique_id),
     name varchar(255) ,

@@ -64,7 +64,7 @@ export class AccueilComponent {
   openDialog(){
     this.dialogRef.open(PopUpComponent,{
       data : {
-        name : 'Samuel'
+        name : 'Critique'
       }
     });
   }

@@ -26,16 +26,22 @@ def add_attraction(data):
 
 def add_critique(data):
     print(data, flush=True)
+
+    if (not "name" in data or data["name"] is None):
+        data["name"] == "anonyme"
     
-    if (not "text" in data or data["text"] == ""):
+    if (not "text" in data or data["text"] is None):
         return False
 
     if (not "note" in data or data["note"] is None):
         return False
+    
+    if (not "attraction_id" in data or data["attraction_id"] is None):
+        return False
 
     else:
-      requete = "INSERT INTO critiques (nom, prenom, text, note) VALUES (?, ?, ?, ?);"
-      id = req.insert_in_db(requete, (data["nom"], data["prenom"], data["text"], data["note"]))
+      requete = "INSERT INTO critiques (name, prenom, text, note, attraction_id) VALUES (?, ?, ?, ?, ?);"
+      id = req.insert_in_db(requete, (data["name"], data["prenom"], data["text"], data["note"] , data["attraction_id"]))
 
     return id
 
