@@ -1,7 +1,8 @@
 export interface CritiqueInterface {
   critique_id: number | null,
-  nom: string,
+  name: string,
   prenom: string, 
-  text: string,
+  texte: string,
   note: number | null ,
+  attraction_id: number
 }

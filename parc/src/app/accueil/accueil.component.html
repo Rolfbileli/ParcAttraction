@@ -18,12 +18,13 @@
           <span>{{attraction.description}}</span>
           <span>{{attraction.difficulte}} / 5</span>
         </div>
+
+        <button class="btn btn-primary" (click)="openDialog(attraction.attraction_id)">
+          Ajouter une critique
+        </button>
       </ng-container>
     </ng-container>
   </mat-card-content>
 
-  <button class="btn btn-primary" (click)="openDialog()">
-    Ajouter une critique
-  </button>
 </mat-card>
 

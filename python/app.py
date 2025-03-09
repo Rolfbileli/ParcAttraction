@@ -83,3 +83,8 @@ def postCritique():
     if (retour):
         return jsonify({"message": "Element ajouté.", "result": retour}), 200
     return jsonify({"message": "Erreur lors de l'ajout.", "result": retour}), 500
+
+@app.get('/critique/attraction')
+def getCritiqueAttraction():
+    result = attraction.get_all_critique_Attraction()
+    return result, 200

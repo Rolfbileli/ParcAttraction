@@ -1,29 +1,30 @@
+DROP TABLE IF EXISTS critique;
 DROP TABLE IF EXISTS attraction;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE attraction (
-    attraction_id int auto_increment,
-    primary key(attraction_id),
-    nom varchar(255) not null,
-    description varchar(255) not null,
-    difficulte int,
-    visible bool default true
+    attraction_id INT AUTO_INCREMENT,
+    nom VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    difficulte INT,
+    visible TINYINT(1) DEFAULT 1,
+    PRIMARY KEY (attraction_id)
 );
 
--- Recréer la table users
 CREATE TABLE users (
-    users_id int auto_increment,
-    primary key(users_id),
-    name varchar(255) not null,
-    password varchar(255) not null
+    users_id INT AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (users_id)
 );
-
-DROP TABLE IF EXISTS critique;
 
 CREATE TABLE critique (
-    critique_id int auto_increment,
-    primary key(critique_id),
-    name varchar(255) ,
-    prenom varchar(255) ,
-    text varchar(255),
-    note int 
-); 
+    critique_id INT AUTO_INCREMENT,
+    name  VARCHAR(255) DEFAULT NULL,
+    prenom  VARCHAR(255) DEFAULT NULL, 
+    texte VARCHAR(255) NOT NULL,
+    note INT CHECK (note BETWEEN 0 AND 5),
+    attraction_id INT NOT NULL,
+    PRIMARY KEY (critique_id),
+    FOREIGN KEY (attraction_id) REFERENCES attraction(attraction_id) ON DELETE CASCADE
+);

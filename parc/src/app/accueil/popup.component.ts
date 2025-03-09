@@ -23,29 +23,40 @@ import { CritiqueInterface } from '../Interface/critique.interface';
 })
 export class PopUpComponent implements OnInit {
 
-  firstName;
-  constructor( @Inject(MAT_DIALOG_DATA) public data , public attractionService: AttractionService ) {
+  firstName: string;
+  id: number;
 
-    this.firstName = data.name
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data,
+    public attractionService: AttractionService
+  ) {
+    this.firstName = data.name;
+    this.id = data.id; 
   }
 
   ngOnInit(): void {
+    this.critiqueFormGroup = this.fc.group({
+      name: [],
+      prenom: [],
+      texte: ["", Validators.required],
+      note: [0, Validators.required],
+      attraction_id: [this.id, Validators.required] 
+    });
   }
 
   public fc = inject(FormBuilder);
 
-  critiqueFormGroup = this.fc.group({
-    name:[""],
-    prenom:[""],
-    text:[0, Validators.required],
-    note:["", Validators.required]
-  });;
-
   public onSubmit(critiqueFormulaire: FormGroup) {
-      console.log(critiqueFormulaire)
-      this.attractionService.postCritiqueAttraction(critiqueFormulaire.getRawValue()).subscribe(result => {
-        critiqueFormulaire.patchValue({critique_id: result.result});
-        
-      });
-    }
+    console.log(critiqueFormulaire)
+    this.attractionService.postCritiqueAttraction(critiqueFormulaire.getRawValue()).subscribe(result => {
+      critiqueFormulaire.patchValue({critique_id: result.result});
+      
+    });
+  }
+
+  critiqueFormGroup; 
+  
+
+
 }
+

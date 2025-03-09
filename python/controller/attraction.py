@@ -28,9 +28,9 @@ def add_critique(data):
     print(data, flush=True)
 
     if (not "name" in data or data["name"] is None):
-        data["name"] == "anonyme"
+        data["name"] = "anonyme"
     
-    if (not "text" in data or data["text"] is None):
+    if (not "texte" in data or data["texte"] is None):
         return False
 
     if (not "note" in data or data["note"] is None):
@@ -38,10 +38,10 @@ def add_critique(data):
     
     if (not "attraction_id" in data or data["attraction_id"] is None):
         return False
-
+    
     else:
-      requete = "INSERT INTO critiques (name, prenom, text, note, attraction_id) VALUES (?, ?, ?, ?, ?);"
-      id = req.insert_in_db(requete, (data["name"], data["prenom"], data["text"], data["note"] , data["attraction_id"]))
+      requete = "INSERT INTO critique (name, prenom, texte, note, attraction_id) VALUES (?, ?, ?, ?, ?);"
+      id = req.insert_in_db(requete, (data["name"], data["prenom"], data["texte"], data["note"] , data["attraction_id"]))
 
     return id
 
@@ -50,8 +50,13 @@ def get_all_attraction():
     
     return json
 
+def get_all_critique_Attraction():
+    json = req.select_from_db("SELECT * FROM attraction a , critique c where a.attraction_id = c.critique_id ")
+    
+    return json
+
 def get_all_critique():
-    json = req.select_from_db("SELECT * FROM critiques")
+    json = req.select_from_db("SELECT * FROM critique")
     
     return json
 
