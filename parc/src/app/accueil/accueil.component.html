@@ -18,8 +18,16 @@
           <span>{{attraction.description}}</span>
           <span>{{attraction.difficulte}} / 5</span>
         </div>
-
-        <button class="btn btn-primary" (click)="openDialog(attraction.attraction_id)">
+        <ng-container *ngFor="let critique of critiques | async;">
+          <ng-container *ngIf="attraction.attraction_id == critique.attraction_id">
+            <div class="critique">
+              <span>{{critique.name}}</span><br/>
+              <span>{{critique.texte}}</span><br/>
+              <span>{{critique.note}} / 5</span><br/>
+            </div>
+          </ng-container>
+        </ng-container>
+        <button class="btnadd" (click)="openDialog(attraction.attraction_id)">
           Ajouter une critique
         </button>
       </ng-container>

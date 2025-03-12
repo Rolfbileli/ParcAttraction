@@ -26,6 +26,15 @@ export class AttractionService {
     return data as Observable<CritiqueInterface[]>;
   }
 
+  public getCritiquesByAttractionId(id: number): Observable<CritiqueInterface[]> {
+    const url = `http://127.0.0.1:5000/critique?attraction_id=${id}`;
+    
+    const data = this.dataService.getData(url);
+    
+    return data as Observable<CritiqueInterface[]>;
+  }
+  
+
   public postAttraction(attraction: AttractionInterface): Observable<MessageInterface> {
     const url = "http://127.0.0.1:5000/attraction";
     const data = this.dataService.postData(url, attraction);

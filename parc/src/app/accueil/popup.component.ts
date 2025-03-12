@@ -26,10 +26,7 @@ export class PopUpComponent implements OnInit {
   firstName: string;
   id: number;
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data,
-    public attractionService: AttractionService
-  ) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data,public attractionService: AttractionService) {
     this.firstName = data.name;
     this.id = data.id; 
   }
@@ -39,7 +36,7 @@ export class PopUpComponent implements OnInit {
       name: [],
       prenom: [],
       texte: ["", Validators.required],
-      note: [0, Validators.required],
+      note: [,Validators.required],
       attraction_id: [this.id, Validators.required] 
     });
   }

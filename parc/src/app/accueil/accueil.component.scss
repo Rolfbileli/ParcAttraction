@@ -11,6 +11,7 @@
   align-items: center;
   column-gap: 25px;
   width: fit-content;
+  background-color: rgb(102, 188, 111);
 
   border-bottom: solid 1px grey;
   span {
@@ -90,4 +91,25 @@ dialog::backdrop {
       animation: none;
     }
   }
+}
+.critique{
+  background-color: rgb(199, 195, 195);
+  padding-left: 10px;
+  padding-top: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-size: 15px;
+  font-weight: 3px solid;
+  margin-top: 8px;
+  height: 70px;
+  border-radius: 3px;
+  width: 900px;
+
+}
+
+.btnadd{
+  margin-top: 8px;
+  margin-bottom: 8px;
+  background-color: rgb(102, 188, 111);
+
 }

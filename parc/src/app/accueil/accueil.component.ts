@@ -32,8 +32,9 @@ export class AccueilComponent {
   {}
   
   public formulaireCritique: FormGroup[] = [];
-  
+
   public attractions: Observable<AttractionInterface[]> = this.attractionService.getAllAttraction()
+  public critiques: Observable<CritiqueInterface[]> = this.attractionService.getAllCritique()
 
 
   public addCritique() {
@@ -56,6 +57,7 @@ export class AccueilComponent {
       }
     });
   }
+
 
   
 }
